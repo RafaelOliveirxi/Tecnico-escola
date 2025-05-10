@@ -1,0 +1,106 @@
+Vamos começar explicando a lógica do sistema de descontos para a livraria utilizando estruturas de seleção.
+
+### Estruturas de Seleção para o Sistema de Descontos:
+
+1. **Se o cliente comprar 1 livro**:
+   - Não há desconto, ou seja, o valor total pago é o valor original.
+
+2. **Se o cliente comprar 2 ou 3 livros**:
+   - O desconto será de 10% sobre o valor total.
+
+3. **Se o cliente comprar 4 ou 5 livros**:
+   - O desconto será de 20% sobre o valor total.
+
+4. **Se o cliente comprar 6 ou mais livros**:
+   - O desconto será de 30% sobre o valor total.
+
+Com isso em mente, a estrutura de seleção em Python ficaria assim:
+
+```python
+def calcular_valor_final(qtd_livros, valor_total):
+    if qtd_livros == 1:
+        desconto = 0
+    elif qtd_livros >= 2 and qtd_livros <= 3:
+        desconto = 0.10
+    elif qtd_livros >= 4 and qtd_livros <= 5:
+        desconto = 0.20
+    else:
+        desconto = 0.30
+    
+    valor_com_desconto = valor_total * (1 - desconto)
+    return valor_com_desconto
+```
+
+Agora, se o cliente comprar **5 livros** e o valor total antes do desconto for **R$ 150,00**, o cálculo do valor com desconto seria:
+
+```python
+qtd_livros = 5
+valor_total = 150.00
+
+valor_com_desconto = calcular_valor_final(qtd_livros, valor_total)
+print(f'O valor a ser pago após o desconto é: R${valor_com_desconto:.2f}')
+```
+
+Com base nas regras, como a quantidade de livros é 5, o desconto seria de **20%**. Logo, o valor a ser pago após o desconto seria:
+
+```python
+valor_com_desconto = 150.00 * (1 - 0.20) = 150.00 * 0.80 = 120.00
+```
+
+Portanto, o cliente pagaria **R$ 120,00** após o desconto.
+
+### Adaptando o Código para Incluir Desconto Adicional para Membros de Clube de Leitura:
+
+Agora, vamos adaptar o código para que, se o cliente for membro de um clube de leitura, ele tenha um desconto adicional de **5%**, independentemente da quantidade de livros comprados.
+
+Vamos adicionar um parâmetro `membro_clube` (que será `True` ou `False`) e verificar se ele é verdadeiro para aplicar o desconto adicional.
+
+```python
+def calcular_valor_final_com_desconto_adicional(qtd_livros, valor_total, membro_clube=False):
+    if qtd_livros == 1:
+        desconto = 0
+    elif qtd_livros >= 2 and qtd_livros <= 3:
+        desconto = 0.10
+    elif qtd_livros >= 4 and qtd_livros <= 5:
+        desconto = 0.20
+    else:
+        desconto = 0.30
+
+    # Aplicando o desconto adicional para membros do clube de leitura
+    if membro_clube:
+        desconto += 0.05  # 5% de desconto adicional
+    
+    valor_com_desconto = valor_total * (1 - desconto)
+    return valor_com_desconto
+```
+
+Agora, se o cliente **for membro do clube de leitura**, o cálculo ficará assim:
+
+```python
+qtd_livros = 5
+valor_total = 150.00
+membro_clube = True  # Cliente é membro do clube de leitura
+
+valor_com_desconto = calcular_valor_final_com_desconto_adicional(qtd_livros, valor_total, membro_clube)
+print(f'O valor a ser pago após o desconto é: R${valor_com_desconto:.2f}')
+```
+
+### Cálculo Final:
+
+1. **Desconto pela quantidade de livros (5 livros)**: 20% de desconto.
+2. **Desconto adicional para membros do clube**: 5% a mais.
+
+Ou seja, o desconto total será de **25%** (20% + 5%).
+
+Agora, o cálculo final será:
+
+```python
+valor_com_desconto = 150.00 * (1 - 0.25) = 150.00 * 0.75 = 112.50
+```
+
+Portanto, o cliente pagaria **R$ 112,50** após o desconto, considerando que ele é membro do clube de leitura.
+
+### Resumo:
+
+- O valor a ser pago após o desconto para **5 livros** e **R$ 150,00** sem o clube seria **R$ 120,00**.
+- Com o desconto adicional de **5%** para membros do clube, o valor a ser pago seria **R$ 112,50**.

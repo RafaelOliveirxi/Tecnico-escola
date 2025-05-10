@@ -1,0 +1,27 @@
+INÍCIO
+    Receber tempo_empresa, salario, vale_refeicao
+
+    SE tempo_empresa <= 5 ENTÃO
+        // Aumento no vale-refeição
+        vale_refeicao = vale_refeicao + valor_aumento
+        EXIBIR "Aumento no vale-refeição aplicado."
+    
+    SENÃO SE tempo_empresa > 5 E tempo_empresa <= 10 ENTÃO
+        // Reajuste de 10% no salário
+        salario = salario * 1.10
+        EXIBIR "Reajuste de 10% no salário aplicado."
+    
+    SENÃO SE tempo_empresa > 10 E tempo_empresa <= 15 ENTÃO
+        // Participação na festa de comemoração
+        participacao_festa = TRUE
+        EXIBIR "Participação na festa de comemoração garantida."
+    
+    SENÃO
+        // Nenhuma ação para colaboradores com mais de 15 anos
+        EXIBIR "Nenhuma ação adicional para colaboradores com mais de 15 anos."
+
+    // Exibir resultados finais
+    EXIBIR "Novo salário:", salario
+    EXIBIR "Novo vale-refeição:", vale_refeicao
+    EXIBIR "Participação na festa:", participacao_festa
+FIM
